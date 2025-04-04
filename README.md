@@ -91,7 +91,7 @@ FindMySHUProf uses a MongoDB database with the following collections:
 
 ### For Professors
 
-1. ** Sign In**:
+1. **Sign In**:
    - Sign in as a professor
    - You'll be directed to your professor dashboard
 
