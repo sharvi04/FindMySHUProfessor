@@ -18,3 +18,6 @@ Authentication:
 
 Integrated with Sacred Heart University Login for secure authentication for students and professors.
 
+Screeenshots:
+
+![image](https://github.com/user-attachments/assets/2da22870-4a40-4980-b6a7-9e78c5b4b29e)
