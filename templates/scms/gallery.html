@@ -1,0 +1,35 @@
+{% extends 'myapp/base.html' %} {% block content %}
+
+<div class="container">
+                <div class="section-heading">
+                    <h2>Our Gallery</h2>
+                    <p class="w-95">Welcome to the gallery of DGBITS Software Limited, where we showcase the moments and milestones that define our journey. </p>
+                </div>
+
+               {% if gallerys %}
+              <div class="row">
+                {% for gallery in gallerys %}
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="gallery-item card shadow-sm">
+                      {% if gallery.thumbnail %}
+                        <img src="{{ gallery.thumbnail.url }}" alt="Gallery Thumbnail" class="card-img-top img-fluid">
+                      {% else %}
+                        <img src="default-thumbnail.jpg" alt="Default Thumbnail" class="card-img-top img-fluid">
+                      {% endif %}
+                      <div class="card-body">
+                        <h5 class="card-title">{{ gallery.title }}</h5>
+                        <p class="card-text">{{ gallery.short_description|truncatewords:15 }}</p>
+                        <a href="{% url 'gallery_detail' slug=gallery.seo_title %}" class="butn small">View Full Gallery</a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <p class="text-center">No galleries available</p>
+            {% endif %}
+
+
+        </div>    
+
+{% endblock %}

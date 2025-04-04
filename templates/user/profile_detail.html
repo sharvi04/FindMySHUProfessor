@@ -1,0 +1,78 @@
+
+{% extends 'myapp/base.html' %} {% block content %}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg border-0 rounded-3 p-3 d-flex flex-md-row flex-column align-items-center">
+        <div class="profile-img me-md-4 mb-3 mb-md-0">
+            {% if profile.profile_picture %}
+                <img alt="{{ user.username }}" src="{{ profile.profile_picture.url }}" class="rounded img-fluid" style="width: 180px; height: 180px; object-fit: cover;">
+            {% else %}
+                <img alt="{{ user.username }}" src="https://via.placeholder.com/180" class="rounded img-fluid" style="width: 180px; height: 180px; object-fit: cover;">
+            {% endif %}
+        </div>
+        <div class="profile-info text-md-start text-center">
+            <h2 class="fw-bold text-dark">{{ user.first_name }} {{ user.last_name }}</h2>
+            <h4 class="text-primary mb-2">{{ profile.designation }}</h4>
+            <p class="mb-1"><strong>Department:</strong> {{ profile.department }}</p>
+            <p class="mb-1"><strong>Contact:</strong> {{ profile.contact_number|default:"N/A" }}</p>
+            <p class="mb-1"><strong>Office Address:</strong> {{ profile.office_address|default:"Not provided" }}</p>
+            <p class="mb-1"><strong>Teaching and Professional Experience:</strong> {{ profile.bio|default:"No bio available." }}</p>
+            <p class="mb-3"><strong>Date Joined:</strong> {{ profile.date_joined|date:"F d, Y" }}</p>
+            <a href="{% url 'user_view' %}" class="btn btn-outline-primary btn-sm">Back to Search</a>
+        </div>
+    </div>
+    
+    
+    <!-- Review Submission Form -->
+    <div class="card shadow-lg border-0 rounded-3 p-4 mt-3">
+        <h3 class="text-center">Leave a Review</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Course Code</label>
+                {{ form.subject }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Teaching Quality</label>
+                {{ form.rating }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Comments</label>
+                {{ form.review_description }}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+        </form>
+    </div>
+    
+    <div class="card shadow-lg border-0 rounded-3 p-4 mt-3">
+        <h3 class="text-center">Student Reviews</h3>
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="border-bottom pb-3 mb-3">
+                    <h5 class="fw-bold">Course Code: {{ review.subject }}</h5>
+                    <p class="mb-1"><strong>Teaching Quality:</strong> {{ review.rating }} / 5</p>
+                    <p class="mb-1"><strong>Review:</strong> {{ review.review_description }}</p>
+                    <p class="mb-1"><strong>By:</strong> {{ review.reviewer.username }}</p>
+                    <p class="text-muted small">Reviewed on {{ review.created_at|date:"F d, Y" }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center text-muted">No reviews available.</p>
+        {% endif %}
+    </div>
+    
+    
+
+    
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}
+

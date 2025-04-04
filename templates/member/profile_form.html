@@ -1,0 +1,50 @@
+{% extends 'member/base.html' %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Update Your Profile</h2>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Render each field manually for better styling -->
+        <div class="mb-3">
+            <label for="id_profile_picture" class="form-label">Profile Picture</label>
+            <input type="file" class="form-control" name="profile_picture" id="id_profile_picture">
+        </div>
+
+        <div class="mb-3">
+            <label for="id_department" class="form-label">Department</label>
+            <input type="text" class="form-control" name="department" id="id_department" value="{{ form.department.value|default_if_none:'' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="id_designation" class="form-label">Designation</label>
+            <input type="text" class="form-control" name="designation" id="id_designation" value="{{ form.designation.value|default_if_none:'' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="id_contact_number" class="form-label">Contact Number</label>
+            <input type="text" class="form-control" name="contact_number" id="id_contact_number" value="{{ form.contact_number.value|default_if_none:'' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="id_office_address" class="form-label">Office Address</label>
+            <textarea class="form-control" name="office_address" id="id_office_address">{{ form.office_address.value|default_if_none:'' }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="id_bio" class="form-label">Bio</label>
+            <textarea class="form-control" name="bio" id="id_bio">{{ form.bio.value|default_if_none:'' }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

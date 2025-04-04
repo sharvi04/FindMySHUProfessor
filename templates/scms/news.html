@@ -1,0 +1,41 @@
+{% extends 'myapp/base.html' %} 
+{% block content %}
+
+{% if articles %}
+
+{% for article in articles %}
+
+            <div class="container mt-4 mb-4">
+                <article class="blog-list-simple">
+                    <div class="row">
+                        <div class="col-md-5 mb-1 mb-lg-0">
+                            <div class="blog-list-simple-img">
+                                {% if article.thumbnail %}
+                                    <img alt="{{ article.title }}" src="{{ article.thumbnail.url }}">
+                                {% else %}
+                                    <p> no image added </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="blog-list-simple-text"><span>Title</span>
+                                <h4><a href="blog-post.html">{{ article.title }}</a></h4>
+                                <p>{{ article.short_description }}
+                                </p><div class="text-start mt-2"><a href="/news/{{ article.title }}" class="butn small"><span>Read More</span></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+
+
+{% endfor %}
+
+{% else %}
+        <p>No articles are available at the moment.</p>
+{% endif %}
+
+
+
+{% endblock %}

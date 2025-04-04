@@ -1,0 +1,159 @@
+{% extends 'myapp/base.html' %}
+
+
+{% block styles %}
+
+<style>
+
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+
+<!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section2 bg-img cover-background top-position1" data-overlay-dark="4" data-background="/media/uploads/bg9_1.jpg">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>{{ project.title }}</h1>
+                    </div>
+                    <div class="col-md-12">
+                        <ul class="ps-0">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/our-projects">Our Projects</a></li>
+                            <li><a href="#">{{ project.title }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BLOG POST
+        ================================================== -->
+        <section class="blogs">
+            <div class="container">
+                <div class="row">
+
+                    <!--  start blog left-->
+                    <div class="col-12">
+                        <div class="posts">
+                            <div class="post">
+                                <div class="post-img">
+                                   <div id="carousel-{{ project.slug }}" class="carousel slide w-100" data-bs-ride="carousel">
+                                      <!-- Indicators/Dots -->
+                                      <div class="carousel-indicators">
+                                        {% for slider in project.slider_images.all %}
+                                          <button type="button" data-bs-target="#carousel-{{ project.slug }}" 
+                                                  data-bs-slide-to="{{ forloop.counter0 }}" 
+                                                  class="{% if forloop.first %}active{% endif %}" 
+                                                  aria-current="{% if forloop.first %}true{% endif %}" 
+                                                  aria-label="Slide {{ forloop.counter }}"></button>
+                                        {% endfor %}
+                                      </div>
+                                    
+                                      <!-- Carousel Items -->
+                                      <div class="carousel-inner">
+                                        {% for slider in project.slider_images.all %}
+                                          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                            <img src="{{ slider.image.url }}" class="d-block w-100" alt="Slider Image {{ forloop.counter }}">
+                                          </div>
+                                        {% empty %}
+                                          <div class="carousel-item active">
+                                            <img src="default-slider.jpg" class="d-block w-100" alt="Default Slider Image">
+                                          </div>
+                                        {% endfor %}
+                                      </div>
+                                    
+                                      <!-- Carousel Controls -->
+                                      <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ project.slug }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                      </button>
+                                      <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ project.slug }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                      </button>
+                                    </div>
+
+
+                                </div>
+                                <div class="content">
+                                    <div class="post-meta">
+                                        <div class="post-title">
+                                            <h2>{{ project.title }}</h2>
+                                            
+                                        </div>
+                                        <ul class="meta ps-0">
+                                            <li>
+ 
+                                                  <p class='special'><span><i class="fa fa-cogs" aria-hidden="true"></i></span> {{project.tech_stack}}</p>
+                                               
+                                            </li>
+                                           
+                                        </ul>
+                                    </div>
+                                    <div class="post-cont">
+                                        <h2>About Client</h2>
+                                        <p>{{project.body}}</p>
+                                    </div>
+                                    <div class="post-cont">
+                                        <h2>How We Helped</h2>
+                                        <p>{{project.extra_body}}</p>
+                                    </div>
+                                    <div class="post-cont">
+                
+                                        <a class='butn primary mt-2 text-white' target='_blank' href='{{project.project_link}}'>Visit Website</a>
+                                        <a class='butn primary mt-2 text-white' href='/our-projects'>Back to Our Projects</a>
+                                    </div>
+                                   
+                                </div>
+                                
+                                <div class="gallery-container">
+                                    <div class="row g-3 mt-4">
+                                    {% for gallery in project.gallery_images.all %}
+                                        {% if forloop.counter0|divisibleby:2 %}
+                                            </div><div class="row g-3">
+                                        {% endif %}
+                                        <div class="col-md-6">
+                                            <div class="post-img">
+                                                <!-- Image wrapped in anchor to open in a new tab -->
+                                                <a href="{{ gallery.image.url }}" target="_blank">
+                                                    <img src="{{ gallery.image.url }}" 
+                                                         alt="Gallery Image {{ forloop.counter }}" 
+                                                         class="img-fluid rounded" 
+                                                         style="width: 100%; height: 100%; object-fit: cover;">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <!-- end blog left -->
+
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'myapp/base.html' %} 
+
+{% block content %}
+
+ <!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section bg-img cover-background" data-overlay-dark="7" data-background="{{ page.banner|safe }}">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>{{ page.title|safe }}</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="text-md-end text-start mt-2 mt-lg-0 ps-0">
+                            <li><a href="home-default.html">Home</a></li>
+                            <li><a href="#!">{{ page.title|safe }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        
+
+{% if page.body1 %}
+<div>{{ page.body1|safe }}</div>
+{% endif %} 
+
+{% if page.body2 %}
+<div>{{ page.body2|safe }}</div>
+{% endif %} 
+
+{% if page.body3 %}
+<div>{{ page.body3|safe }}</div>
+{% endif %} 
+
+{% if page.body4 %}
+<div>{{ page.body4|safe }}</div>
+{% endif %} 
+
+{% if page.extra_body %}
+<div>{{ page.extra_body|safe }}</div>
+{% endif %} 
+
+{% comment %} 
+endblock 
+{% endcomment %} 
+
+{%endblock %}

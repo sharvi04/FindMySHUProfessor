@@ -1,0 +1,66 @@
+
+{% extends 'myapp/base.html' %} {% block content %}
+
+
+
+<section class="parallax" data-overlay-dark="7" data-background="/media/uploads/bg1_fBBrNzI.jpg">
+    <div class="container text-center">
+        <div class="section-heading half white">
+            <h2>Search Your Professor</h2>
+            <p>Know the professor shaping your academic journey.</p>
+        </div>
+        <form class="d-flex justify-content-center" action="{% url 'user_view' %}" method="GET">
+            <input class="form-control me-2 w-50" type="search" name="search" value="{{ query }}" placeholder="Search for a professor..." aria-label="Search">
+            <button class="butn white" type="submit"><span>Search</span></button>
+        </form>
+    </div>
+</section>
+
+
+
+
+
+
+ <!-- TEAM
+        ================================================== -->
+        <section class="bg-grey">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Search Results Section</h2>
+                    <p class="w-95 w-md-75 w-lg-55 mx-auto"></p>
+                </div>
+               <div class="row mt-n1-9">
+{% for user in users %}
+    {% with user.member_profile as profile %}
+    <div class="col-md-4 mt-3">
+        <div class="card shadow-lg border-0 rounded-3">
+            <div class="card-body text-center">
+                <div class="profile-img mb-3">
+                    {% if profile.profile_picture %}
+                        <img class="rounded-circle img-fluid" alt="{{ user.username }}" src="{{ profile.profile_picture.url }}" style="width: 120px; height: 120px; object-fit: cover;">
+                    {% else %}
+                        <img class="rounded-circle img-fluid" alt="{{ user.username }}" src="https://via.placeholder.com/150" style="width: 120px; height: 120px; object-fit: cover;">
+                    {% endif %}
+                </div>
+                <h5 class="fw-bold text-dark mb-1">{{ user.first_name }} {{ user.last_name }}</h5>
+                <p class="text-muted mb-1">{{ profile.designation }}</p>
+                <p class="small text-secondary"><strong>Department:</strong> {{ profile.department }}</p>
+                <p class="small text-secondary"><strong>Contact:</strong> {{ profile.contact_number|default:"N/A" }}</p>
+                <p class="small text-secondary">{{ profile.bio|default:"No bio available." }}</p>
+                <a href="{% url 'profile_detail' user.id %}" class="btn btn-primary btn-sm mt-2">View Profile</a>
+            </div>
+        </div>
+    </div>
+    {% endwith %}
+{% empty %}
+    <p class="text-center text-muted">No users found.</p>
+{% endfor %}
+
+</div>
+
+            </div>
+        </section>
+
+
+{% endblock %}
+

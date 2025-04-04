@@ -1,0 +1,334 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+
+<meta charset="utf-8" />
+<meta name="author" content="DGBITS" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="keywords" content="DGBITS - DGBITS SOFTWARE PRIVATE LIMITED" />
+<meta name="description" content="DGBITS - DGBITS SOFTWARE PRIVATE LIMITED" />
+
+<!-- title -->
+<title>myshuprof</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" href="https://rms.schronix.com/media/uploads/school-logo-26.png" />
+<link rel="apple-touch-icon" href="https://djcms.dgbits.in/media/uploads/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="https://djcms.dgbits.in/media/uploads/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="https://djcms.dgbits.in/media/uploads/apple-icon-57x57.png" />
+
+<!-- plugins -->
+<link rel="stylesheet" href="{% static 'css/plugins.css' %}" />
+
+<!-- revolution slider css -->
+<link rel="stylesheet" href="{% static 'css/rev_slider/settings.css' %}" />
+<link rel="stylesheet" href="{% static 'css/rev_slider/layers.css' %}" />
+<link rel="stylesheet" href="{% static 'css/rev_slider/navigation.css' %}" />
+
+<!-- quform css -->
+<link rel="stylesheet" href="{% static 'quform/css/base.css' %}" />
+
+<!-- search css -->
+<link rel="stylesheet" href="{% static 'search/search.css' %}" />
+
+<!-- theme core css -->
+<link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+    
+{% block styles %} {% endblock %}
+
+
+
+  </head>
+
+  <body>
+    <!-- HEADER
+        ================================================== -->
+    <header class="header-style8">
+
+      <div class="navbar-default">
+
+
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="menu_area alt-font">
+                <nav class="navbar navbar-expand-lg navbar-light p-0">
+                  <div class="navbar-header navbar-header-custom">
+                    <!-- logo -->
+                    <a href="/" class="navbar-brand logodefault"
+                      ><img id="logo" src="https://rms.schronix.com/media/uploads/uni-logo.png" alt="logo"
+                    /></a>
+                    <!-- end logo -->
+                  </div>
+
+                  <div class="navbar-toggler"></div>
+                  
+                  
+<ul class="navbar-nav ms-auto" id="nav" style="display: none">
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+        </li>
+
+        <!-- Profile Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if user.student_profile.profile_picture %}
+                    <img src="{{ user.student_profile.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" width="40" height="40">
+                {% else %}
+                    <img src="{% static 'img/avatars/default-profile.jpg' %}" alt="Default Profile" class="rounded-circle" width="40" height="40">
+                {% endif %}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                <li><a class="dropdown-item" href="{% url 'user_view' %}">Home</a></li>
+                <li><a class="dropdown-item" href="{% url 'user_reviews' %}">User Reviews</a></li>
+                <li><a class="dropdown-item" href="{% url 'student_profile' %}">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="dropdown-item" type="submit">Log Out</button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+        </li>
+    {% endif %}
+</ul>
+
+
+                  
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {% block content %} {% endblock %}
+
+<!-- FOOTER
+        ================================================== -->
+
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GKGSG8FP4D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GKGSG8FP4D');
+</script>
+  <meta charset="UTF-8">
+  
+  <meta name="author" content="Sacred Heart">
+  <meta name="generator" content=" TERMINALFOUR">
+  <link rel="canonical" href="//www.sacredheart.edu/">
+  <meta name="SectionID" content="23535">  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+    
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+
+    
+	<!-- Facebook -->
+	<meta property="og:title" content="Home">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="images/Sacred-Heart-OG.png">
+	<meta property="og:image:width" content="1220">
+	<meta property="og:image:height" content="686">
+	
+	<meta property="og:site_name" content="Sacred Heart University">
+
+	<script src="js/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+
+   
+	<link rel="stylesheet" type="text/css" media="all" href="css/site11022025.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/exc1cqg.css">
+
+
+  
+  
+
+<!-- Footer -->
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        footer {
+            width: 100%;
+            background-color: #6c757d;
+            color: white;
+            padding: 40px 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .footer-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .footer-left {
+            width: 100%;
+            margin-bottom: 24px;
+        }
+        .footer-right {
+            width: 100%;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            text-align: center;
+        }
+        h6 {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        p {
+            font-size: 14px;
+            margin: 0;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            margin: 20px 0;
+        }
+        .divider {
+            display: none;
+        }
+        
+        /* Media queries for responsive design */
+        @media (min-width: 768px) {
+            .footer-left {
+                width: 50%;
+                margin-bottom: 0;
+            }
+            .footer-right {
+                width: 50%;
+                text-align: right;
+            }
+            .divider {
+                display: inline;
+            }
+        }
+    </style>
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <div class="footer-left">
+                    <h6>OUR LOCATION</h6>
+                    <p>5151 Park Avenue<br>Fairfield, CT 06825<br>203-371-7999</p>
+                </div>
+                <div class="footer-right">
+                    <h6>GLOBAL CAMPUSES</h6>
+                    <p>
+                        <a href="#" class="footer-links">Dingle Campus</a><br>
+                        <a href="#" class="footer-links">Online Programs</a>
+                    </p>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div class="footer-links">
+                <a href="#">Careers at SHU</a>
+                <span class="divider">|</span>
+                <a href="#">Site Feedback</a>
+                <span class="divider">|</span>
+                <a href="#">Directions</a>
+                <span class="divider">|</span>
+                <a href="#">Virtual Tour</a>
+                <span class="divider">|</span>
+                <a href="#">Campus Map</a>
+                <span class="divider">|</span>
+                <a href="#">Privacy Statement</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> SACRED HEART UNIVERSITY</p>
+            </div>
+        </div>
+    </footer>
+
+<!-- start scroll to top -->
+
+    <a href="#" class="scroll-to-top"
+      ><i class="fas fa-angle-up" aria-hidden="true"></i
+    ></a>
+    <!-- end scroll to top -->
+
+    <!-- all js include start -->
+
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+    <!-- popper js -->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+
+    <!-- bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- core.min.js -->
+    <script src="{% static 'js/core.min.js' %}"></script>
+
+    <!-- search -->
+    <script src="{% static 'search/search.js' %}"></script>
+
+    <!-- revolution slider js files start -->
+    <script src="{% static 'js/rev_slider/jquery.themepunch.tools.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/jquery.themepunch.revolution.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/extensions/revolution.extension.actions.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/extensions/revolution.extension.carousel.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/extensions/revolution.extension.kenburn.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/extensions/revolution.extension.migration.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/extensions/revolution.extension.navigation.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/extensions/revolution.extension.parallax.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/extensions/revolution.extension.slideanims.min.js' %}"></script>
+    <script src="{% static 'js/rev_slider/extensions/revolution.extension.video.min.js' %}"></script>
+
+    <!-- theme core scripts -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <!-- quform plugins js -->
+    <script src="{% static 'quform/js/plugins.js' %}"></script>
+
+    <!-- quform scripts js -->
+    <script src="{% static 'quform/js/scripts.js' %}"></script>
+
+    <!-- all js include end -->
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'member/base.html' %} 
+
+{% block styles %}
+
+{%endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success btn-sm">Save changes</button>
+</form>
+
+{%endblock %}
+
+{% block scripts %}
+
+
+
+
+{%endblock %}
+

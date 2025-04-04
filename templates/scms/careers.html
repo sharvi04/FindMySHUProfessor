@@ -1,0 +1,257 @@
+{% extends 'myapp/base.html' %}
+
+
+{% block styles %}
+
+<style>
+
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+
+{% if messages %}
+    <script>
+        {% for message in messages %}
+            alert("{{ message }}");
+        {% endfor %}
+    </script>
+{% endif %}
+
+
+<!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section2 bg-img cover-background top-position1" data-overlay-dark="4" data-background="/media/uploads/bg5_1.jpg">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Careers</h1>
+                    </div>
+                    <div class="col-md-12">
+                        <ul class="ps-0">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="#!">Careers</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BLOG
+        ================================================== -->
+        <section class="blogs ">
+            <div class="container">
+                <div class="row">
+                    <!-- blog left-->
+                    <div class="col-lg-9 pe-xl-4 mb-1-9 mb-lg-0">
+                  
+                            
+<div id="accordion" class="accordion-style">
+    {% if careers %}
+        {% for career in careers %}
+        <div class="card">
+            <div class="card-header" id="heading{{ forloop.counter }}">
+                <h5 class="mb-0">
+                    <button class="btn btn-link {% if not forloop.first %}collapsed{% endif %}" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#collapse{{ forloop.counter }}" 
+                            aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" 
+                            aria-controls="collapse{{ forloop.counter }}">
+                        {{ career.title }}
+                    </button>
+                </h5>
+            </div>
+            <div id="collapse{{ forloop.counter }}" 
+                 class="collapse {% if forloop.first %}show{% endif %}" 
+                 aria-labelledby="heading{{ forloop.counter }}" 
+                 data-bs-parent="#accordion">
+                <div class="card-body">
+                    <p><span class='text-extra-dark-gray font-weight-600 alt-font'>Job Type: </span>{{career.job_type}}</p>
+                    <p><span class='text-extra-dark-gray font-weight-600 alt-font'>Relevant Experience: </span>{{career.requirement}}</p>
+                    <p><span class='text-extra-dark-gray font-weight-600 alt-font'>Requirement: </span>{{career.experience_required}}</p>
+
+                </div>
+                <div class="card-body">
+                    {{ career.description|safe }}
+                </div>
+                <div class="card-body">
+                    {{ career.responsibilities |safe }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="card">
+            <div class="card-body text-center">
+                <p>No careers available at the moment. Please check back later.</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+                                                
+                     
+                    </div>
+                    <!--  end blog left-->
+
+                    <!--  blog right-->
+                    <div class="col-lg-3 card card-style1">
+                        <div class="side-bar ">
+
+
+                            <div class="widget">
+                                <div class="widget-title p-2">
+                                    <h6>Apply Now:</h6>
+                                    <p>Only full-time candidates are encouraged to apply. If you are interested, fill in the form below and we’ll be in touch with you shortly.</p>
+                                </div>
+                                <form class="contact quform p-2" action="{% url 'careers' %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="quform-elements">
+                                        <div class="row">
+                            
+                                            <!-- Begin Text input element -->
+                                            <div class="col-12">
+                                                <div class="quform-element form-group">
+                                                    <div class="quform-input">
+                                                        <input class="form-control" id="name" type="text" name="name" required placeholder="Your name here" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Text input element -->
+                                            <!-- Begin Text input element -->
+                                            <div class="col-12">
+                                                <div class="quform-element form-group">
+                                                    <div class="quform-input">
+                                                        <input class="form-control" id="phone" type="text" name="phone" required placeholder="Your phone here" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Text input element -->
+                            
+                                            <!-- Begin Text input element -->
+                                            <div class="col-12">
+                                                <div class="quform-element form-group">
+                                                    <div class="quform-input">
+                                                        <input class="form-control" id="email" type="text" name="email" placeholder="Your email here" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Text input element -->
+                                            <!-- Begin Select input element -->
+                                            <div class="col-12">
+                                                <div class="quform-element form-group">
+                                                    <div class="quform-input">
+                                                        <select class="form-control" id="apply_role" name="apply_role">
+                                                            <option value="" disabled selected>--- Select Applying Role ---</option>
+                                                            {% for career in careers %}
+                                                                <option value="{{ career.title }}" title="{{ career.title }}">
+                                                                    {{ career.title|truncatechars:30 }} <!-- Truncate the text to 30 characters -->
+                                                                </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Select input element -->
+                                            <!-- Begin Text input element -->
+                                            <div class="col-12">
+                                                <div class="quform-element form-group">
+                                                    <div class="quform-input">
+                                                        <input class="form-control" id="resume" type="file" name="resume" required placeholder="Choose File" />
+                                                        <small>Your Resume or CV</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Text input element -->
+                                            
+                            
+                                            <!-- Begin Textarea element -->
+                                            <div class="col-12">
+                                                <div class="quform-element form-group">
+                                                    <div class="quform-input">
+                                                        <textarea class="form-control h-100" id="message" name="message" rows="3" placeholder="Your Message"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Textarea element -->
+                            
+                                            <!-- Begin Submit button -->
+                                            <div class="col-12">
+                                                <div class="quform-submit-inner">
+                                                    <button class="butn" type="submit"><span>Sumbit Request</span></button>
+                                                </div>
+                                                <div class="quform-loading-wrap text-start"><span class="quform-loading"></span></div>
+                                            </div>
+                                            <!-- End Submit button -->
+                            
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--  end blog right-->
+                </div>
+            </div>
+        </section>
+
+
+{% endblock %}
+<script>
+    $(document).ready(function() {
+    $("#job-request-form").on("submit", function(e) {
+        e.preventDefault();  // Prevent normal form submission
+
+        // Show a loading spinner or message if desired
+        $('#response-message').html('Submitting your application...');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "careers" %}',  // Adjust to match your URL name for the careers page
+            data: new FormData(this),  // Send form data including files
+            processData: false,  // Don't process the data
+            contentType: false,  // Don't set content-type header
+            success: function(response) {
+                if (response.status == 'success') {
+                    $('#response-message').html('<div class="alert alert-success">' + response.message + '</div>');
+                } else {
+                    $('#response-message').html('<div class="alert alert-danger">' + response.message + '</div>');
+                }
+            },
+            error: function() {
+                $('#response-message').html('<div class="alert alert-danger">There was an error submitting your application. Please try again.</div>');
+            }
+        });
+    });
+});
+
+
+
+function getCSRFToken() {
+    var cookieValue = null;
+    if (document.cookie && document.cookie.indexOf('csrftoken') >= 0) {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.startsWith('csrftoken=')) {
+                cookieValue = cookie.substring('csrftoken='.length);
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRFToken': getCSRFToken()  // Send CSRF token with the AJAX request
+    }
+});
+
+</script>

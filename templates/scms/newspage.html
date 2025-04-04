@@ -1,0 +1,55 @@
+{% extends 'myapp/base.html' %} 
+{% block content %}
+
+<div class="container mt-2">
+ <div class="col-lg-9 pe-xl-1-9 mb-1-9 mb-lg-0">
+    <div class="posts">
+        <div class="post">
+            <!-- Post Image -->
+            <div class="post-img">
+                <a href="#!" class="w-100">
+                                {% if article.thumbnail %}
+                                    <img alt="{{ article.title }}" src="{{ article.thumbnail.url }}">
+                                {% else %}
+                                   <p> no image added </p>
+                                {% endif %}
+                </a>
+            </div>
+            
+            <!-- Post Content -->
+            <div class="content">
+                <!-- Post Meta and Title -->
+                <div class="post-meta">
+                    <div class="post-title">
+                        <h2>{{ article.title }}</h2>
+                    </div>
+                </div>
+
+                <!-- Post Description -->
+                <div class="post-cont">
+                    <p>
+                       {{article.body1}}
+                    </p>
+                    <p>
+                       {{article.body2}}
+                    </p>
+                    <p>
+                       {{article.body3}}
+                    </p>
+                    <p>
+                       {{article.body4}}
+                    </p>
+                    <p>
+                       {{article.extra_body}}
+                    </p>
+                    <p>
+                       {{article.category}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

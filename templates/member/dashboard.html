@@ -1,0 +1,124 @@
+{% extends 'member/base.html' %} 
+
+{% block styles %}
+
+{%endblock %}
+
+{% block content %}
+
+
+{% load custom_filters %}
+
+<!-- start page inner -->
+                <div class="page-title">
+                    <h3 class="breadcrumb-header">Reviews</h3>
+                </div>
+                <!-- start page main wrapper -->
+                <div id="main-wrapper">
+                   
+                   
+                   <div class="row">
+    {% for review in reviews %}
+    <div class="col-xl-4 col-lg-6 col-md-6">
+        <div class="card card-white stats-widget">
+            <div class="card-body">
+                <div class="float-start">
+                    <span class="stats-number">{{ review.get_rating_display }} - {{ review.subject }}</span>
+                  
+                    <p class="stats-info">{{ review.review_description }}</p>
+                    <p class="text-muted">Reviewed by <strong>{{ review.reviewer.username }}</strong></p>
+                </div>
+
+                <br />
+                <hr />
+
+                <!-- Star Rating -->
+                <div class="rating mt-3 mb-3">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= review.rating %}
+                            <i class="fas fa-star text-warning"></i>
+                        {% else %}
+                            <i class="far fa-star text-muted"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <br />
+                <hr />
+
+                <!-- Display Existing Replies -->
+                {% for reply in review.replies.all %}
+                    <div class="alert alert-secondary">
+                        <p><strong>{{ reply.responder.username }}</strong>: {{ reply.message }}</p>
+                        <small class="text-muted">Replied on {{ reply.responded_at }}</small>
+                    </div>
+                    
+                    {% if reply.responder == request.user %}
+                                <div class="reply-actions mt-2">
+                                    <a href="{% url 'edit_reply_member' reply.id %}" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a href="{% url 'delete_reply_member' reply.id %}" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </a>
+                                </div>
+                            {% endif %}
+                    
+                {% endfor %}
+                
+                
+
+
+                <!-- Reply Form (Initially Hidden) -->
+                {% with reply_forms|dict_get:review.id as form %}
+    <!-- Reply Button -->
+    <button class="btn btn-primary btn-sm reply-btn" data-review-id="{{ review.id }}">
+        <i class="fas fa-reply"></i> Reply
+    </button>
+
+    <!-- Reply Form (Initially Hidden) -->
+    <form method="post" action="{% url 'add_reply_member' review.id %}" 
+          class="reply-form mt-2" 
+          id="reply-form-{{ review.id }}" 
+          style="display: none;">
+        {% csrf_token %}
+        
+        <!-- Ensure the form has a textarea input -->
+        <div class="mb-2">
+            <label for="reply-message-{{ review.id }}" class="form-label">Your Reply:</label>
+            <textarea name="message" id="reply-message-{{ review.id }}" class="form-control" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-sm">Submit Reply</button>
+    </form>
+{% endwith %}
+
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+                   
+                </div>
+                <!-- end page main wrapper -->
+<!-- end page inner -->
+
+{%endblock %}
+
+{% block scripts %}
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".reply-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                let reviewId = this.getAttribute("data-review-id");
+                let form = document.getElementById("reply-form-" + reviewId);
+                form.style.display = form.style.display === "none" ? "block" : "none";
+            });
+        });
+    });
+</script>
+
+{%endblock %}

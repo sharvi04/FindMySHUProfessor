@@ -1,0 +1,38 @@
+
+{% extends 'myapp/base.html' %} {% block content %}
+
+<div class="container mt-5 ">
+    <h2 class="text-center mb-4 text-info">Reviews You've Given</h2>
+
+    {% for review in reviews %}
+    <div class="card mb-4 mb-4 shadow-sm border-0">
+        <div class="card-body">
+            <h5 class="card-title text-primary">Review for: {{ review.user.first_name }} {{ review.user.last_name }}</h5>
+            <p class="fw-bold text-warning">⭐ {{ review.get_rating_display }} - {{ review.subject }}</p>
+            <p class="card-text">{{ review.review_description }}</p>
+            <p class="text-muted small">Reviewed on: {{ review.created_at|date:"F d, Y H:i A" }}</p>
+
+            {% if review.replies.all %}
+                <h6 class="mt-3">Replies:</h6>
+                <ul class="list-group list-group-flush">
+                    {% for reply in review.replies.all %}
+                    <li class="list-group-item border-0">
+                        <strong class="text-dark">{{ reply.responder.username }}</strong> replied on 
+                        <span class="text-muted small">{{ reply.responded_at|date:"F d, Y H:i A" }}</span>:
+                        <p class="mb-0">{{ reply.message }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No replies yet.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center text-muted">You haven't given any reviews yet.</p>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+

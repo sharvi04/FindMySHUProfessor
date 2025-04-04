@@ -1,0 +1,90 @@
+{% extends 'myapp/base.html' %}
+
+
+{% block styles %}
+
+<style>
+    .project-thumbnail-container {
+    display: flex;
+    justify-content: center;  /* Centers the image horizontally */
+    align-items: center;      /* Centers the image vertically */
+    height: 200px;            /* Adjust height as needed */
+    width: 100%;              /* Makes sure the container takes up full width */
+    overflow: hidden;         /* Ensures the image doesn't spill outside the container */
+}
+
+.project-thumbnail-container img {
+    object-fit: cover;        /* Ensures the image covers the container area */
+    max-width: 100%;           /* Prevents the image from overflowing the container */
+    max-height: 100%;          /* Prevents the image from overflowing the container */
+    border-radius: 8px;       /* Optional: Adds rounded corners to the image */
+
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+
+<!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section2 bg-img cover-background top-position1" data-overlay-dark="4" data-background="{{ page.banner.url }}">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>{{page.title}}</h1>
+                    </div>
+                    <div class="col-md-12">
+                        <ul class="ps-0">
+                            <li><a href="home-default.html">Home</a></li>
+                            <li><a href="#!">{{page.title}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+ <!-- WE OFFER
+        ================================================== -->
+        <section>
+            <div class="container">
+                <div class="section-heading">
+    <h2>We Deliver Innovative Software Solutions</h2>
+    <p class="w-95 w-md-90 w-lg-90 mx-auto">At DGBITS, we specialize in providing cutting-edge software solutions that are tailored 
+    to meet the unique needs of businesses across various industries. Our team of experts is committed to delivering projects on time, within budget, and with an emphasis on scalability and performance. We focus on creating technology that accelerates growth, enhances efficiency, and drives success.</p>
+</div>
+                <div class="row mt-n1-9">
+                    {% for project in projects %}
+                        <div class="col-md-4 col-lg-4 mt-1-9">
+                            <div class="service-simple">
+                                <div class="overflow-hidden project-thumbnail-container mt-3">
+                                    {% if project.thumbnail %}
+                                        <img alt="{{ project.title }}" src="{{ project.thumbnail.url }}">
+                                    {% else %}
+                                        <img alt="{{ project.title }}" src="default-thumbnail.jpg">
+                                    {% endif %}
+                                </div>
+
+                                <div class="service-simple-inner">
+                                    <h3 class="display-28">{{ project.title }}</h3>
+                                    <div class="separator-line-horrizontal-full bg-medium-gray mt-2 mb-4"></div>
+                                    <p>{{ project.tech_stack }}</p>
+                                    <a href="{% url 'projectdetails' slug=project.slug %}" class="butn small" target="_blank">
+                                        <span>Learn More</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>No projects found.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

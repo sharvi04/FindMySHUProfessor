@@ -1,0 +1,89 @@
+{% extends 'myapp/base.html' %} 
+
+{% block content %}
+
+ <!-- PAGE TITLE
+        ================================================== -->
+     
+        
+        
+        <section class="page-title-section2 bg-img cover-background top-position" data-overlay-dark="1" data-background="/media/{{page.banner|safe}}" style="background-image: url(&quot;/media/{{page.banner|safe}}quot;);">
+
+            <div class="container">
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-lg-10 col-md-12">
+                        <h1 class="m-0 p-0">{{ page.main_header|safe }}</h1>
+                        <p class="m-0 p-0 text-white"> {{ page.sub_header|safe }}</p>
+                    </div>
+                    <div class="col-lg-10 col-md-12">
+                        <ul class="ps-0">
+                            <li><a href="/home">Home</a></li>
+                            <li><a href="#!">{{ page.title|safe }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        
+     <section class="m-0 p-0">
+            <div class="container">
+                <div class="row">   <!-- right side section -->
+ <div class="col-lg-8 order-1 order-lg-1 mb-1-9 mb-lg-0 text-justify">
+                        
+                        {% if page.body1 %}
+{{ page.body1|safe }}
+{% endif %} 
+
+{% if page.body2 %}
+{{ page.body2|safe }}
+{% endif %} 
+
+{% if page.body3 %}
+{{ page.body3|safe }}
+{% endif %} 
+                        
+                        </div>   <!-- right side ends -->
+                    <!-- left side section -->
+                    <div class="col-lg-4 pe-xl-6 order-2 order-lg-2 mb-1-9 mb-lg-0 text-justify">
+
+                       {% if page.body4 %}
+{{ page.body4|safe }}
+{% endif %} 
+
+{% if page.extra_body %}
+{{ page.extra_body|safe }}
+{% endif %} 
+
+                    </div>
+                    <!-- end left side section -->
+
+                 
+                   </div></div>
+        </section>
+
+
+
+{% if page.cta_header %}
+<section class="bg-black">
+    <div class="container text-center">
+        <div class="section-heading half white">
+            <h2>
+{{ page.cta_header|safe }}
+</h2>
+            <p>{% if page.cta_body %}
+{{ page.cta_body|safe }}
+{% endif %} </p>
+        </div>
+        <a href="{{ page.cta_link_url|safe }}" class="butn primary white-hover"><span>{{ page.cta_action_text|safe }}</span></a>
+    </div>
+</section>
+{% endif %} 
+
+{% comment %} 
+endblock 
+{% endcomment %} 
+
+{%endblock %}
