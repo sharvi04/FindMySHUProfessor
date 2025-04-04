@@ -30,7 +30,8 @@ Professor POV:
 ![image](https://github.com/user-attachments/assets/36ba4dea-385c-4ebb-a636-afbb90d01473)
 
 Admin POV:
-![image](https://github.com/user-attachments/assets/af1327f0-7fb5-4998-a5f6-391cc41345ea)
+![image](https://github.com/user-attachments/assets/4af9d52c-6c7f-4119-93ff-c45c96fd9c90)
+
 
 
 
